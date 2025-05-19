@@ -1,27 +1,24 @@
 import { Page } from "@playwright/test";
 
 export default class PlaywrightWrapper {
+  constructor(private page: Page) {}
 
-    constructor(private page: Page) { }
+  async goto(url: string) {
+    await this.page.goto(url, {
+      waitUntil: "domcontentloaded",
+    });
+  }
 
-    async goto(url: string) {
-        await this.page.goto(url, {
-            waitUntil: "domcontentloaded"
-        });
-    }
+  async waitAndClick(locator: string) {
+    const element = this.page.locator(locator);
+    await element.waitFor({
+      state: "visible",
+    });
+    await element.click();
+  }
 
-    async waitAndClick(locator: string) {
-        const element = this.page.locator(locator);
-        await element.waitFor({
-            state: "visible"
-        });
-        await element.click();
-    }
-
-async navigateTo(link: string) {
+  async navigateTo(link: string) {
     await this.page.click(link);
-    await this.page.waitForLoadState('networkidle'); // ou 'domcontentloaded'
-}
-
-
+    await this.page.waitForLoadState("networkidle"); // ou 'domcontentloaded'
+  }
 }

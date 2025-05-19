@@ -24,13 +24,21 @@ export default class LostPasswordPage {
   }
 
   async deveVerMensagemErroCPFNaoEncontrado(mensagem: string) {
-    await expect(this.selectors.alertaErro).toHaveText(new RegExp(mensagem, "i"));
+    await expect(this.selectors.alertaErro).toHaveText(
+      new RegExp(mensagem, "i"),
+    );
   }
 
   async deveEstarNaPaginaDeConfirmacao() {
-    await expect(this.page).toHaveURL("http://localhost/lostpassword/emailsend");
-    await expect(this.page.getByRole('tabpanel', { name: 'Redefinir senha' })).toBeVisible();
-  await expect(this.page.getByLabel('Redefinir senha')).toContainText('E-mail enviado. Confira sua caixa de entrada e siga as instruções no e-mail para continuar a reconfiguração da senha.');
+    await expect(this.page).toHaveURL(
+      "http://localhost/lostpassword/emailsend",
+    );
+    await expect(
+      this.page.getByRole("tabpanel", { name: "Redefinir senha" }),
+    ).toBeVisible();
+    await expect(this.page.getByLabel("Redefinir senha")).toContainText(
+      "E-mail enviado. Confira sua caixa de entrada e siga as instruções no e-mail para continuar a reconfiguração da senha.",
+    );
   }
 
   async campoCPFDeveEstarVisivel() {

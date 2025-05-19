@@ -5,7 +5,9 @@ export default class AtribuicaoPage {
 
   private selectors = {
     logo: this.page.locator("#logo"),
-    abaAtribuicao: this.page.getByRole("tab", { name: /Escolha a atribuição/i }),
+    abaAtribuicao: this.page.getByRole("tab", {
+      name: /Escolha a atribuição/i,
+    }),
     dropdownAtribuicao: this.page.getByLabel("Atribuicao"),
     botaoSalvar: this.page.getByRole("button", { name: "Salvar" }),
     botaoSair: this.page.getByRole("button", { name: "Sair" }),
@@ -21,7 +23,9 @@ export default class AtribuicaoPage {
     await expect(this.selectors.nomeUsuario).toContainText(nomeUsuario);
     await expect(this.selectors.botaoSalvar).toContainText("Salvar");
     await expect(this.selectors.botaoSair).toContainText("Sair");
-    await expect(this.selectors.textoAba).toContainText("Escolha a atribuição para esta sessão");
+    await expect(this.selectors.textoAba).toContainText(
+      "Escolha a atribuição para esta sessão",
+    );
   }
 
   async selecionarAtribuicao(valor: string) {

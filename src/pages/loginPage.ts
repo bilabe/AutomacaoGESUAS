@@ -4,8 +4,8 @@ export default class LoginPage {
   constructor(private page: Page) {}
 
   private selectors = {
-    cpfInput: this.page.getByRole('textbox', { name: 'CPF' }),
-    senhaInput: this.page.getByRole('textbox', { name: 'Senha' }),
+    cpfInput: this.page.getByRole("textbox", { name: "CPF" }),
+    senhaInput: this.page.getByRole("textbox", { name: "Senha" }),
     acessarBtn: this.page.locator("button[type='submit']"),
   };
 
@@ -38,11 +38,13 @@ export default class LoginPage {
   }
 
   async deveEstarNaPaginaDeAtribuicao() {
-    await expect(this.page).toHaveURL("http://localhost/set_atribuicao_escolhida");
+    await expect(this.page).toHaveURL(
+      "http://localhost/set_atribuicao_escolhida",
+    );
   }
 
   localizarMensagemErro() {
-    return this.page.getByText('Usuário inexistente ou senha');
+    return this.page.getByText("Usuário inexistente ou senha");
   }
 
   async deveVerMensagemErro() {
@@ -50,20 +52,22 @@ export default class LoginPage {
   }
 
   // Verifica se a logo do GESUAS está visível
-async logoGesuasDeveEstarVisivel() {
-  await expect(this.page.locator('img[alt="Logo Gesuas"]')).toBeVisible();
-}
+  async logoGesuasDeveEstarVisivel() {
+    await expect(this.page.locator('img[alt="Logo Gesuas"]')).toBeVisible();
+  }
 
-// Verifica se o título "Seja bem-vindo ao Gesuas!" está visível
-async tituloBemVindoDeveEstarVisivel() {
-  await expect(this.page.locator('h1')).toHaveText("Seja bem-vindo ao Gesuas!");
-}
+  // Verifica se o título "Seja bem-vindo ao Gesuas!" está visível
+  async tituloBemVindoDeveEstarVisivel() {
+    await expect(this.page.locator("h1")).toHaveText(
+      "Seja bem-vindo ao Gesuas!",
+    );
+  }
 
-async clicarEsqueceuSenha() {
-  await this.page.getByRole('link', { name: 'Esqueceu sua senha?' }).click();
-}
+  async clicarEsqueceuSenha() {
+    await this.page.getByRole("link", { name: "Esqueceu sua senha?" }).click();
+  }
 
-async deveEstarNaPaginaDeRecuperacaoSenha() {
-  await expect(this.page).toHaveURL("http://localhost/lostpassword/");
-}
+  async deveEstarNaPaginaDeRecuperacaoSenha() {
+    await expect(this.page).toHaveURL("http://localhost/lostpassword/");
+  }
 }

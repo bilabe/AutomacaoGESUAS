@@ -3,10 +3,7 @@
     "target": "ES2020",
     "module": "CommonJS",
     "lib": ["es2021", "dom"],
-    "typeRoots": [
-      "./node_modules/@types",
-      "src/helper/types"
-    ],
+    "typeRoots": ["./node_modules/@types", "src/helper/types"],
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -19,10 +16,5 @@
       "*": ["node_modules/*", "src/types/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "test/**/*.ts",
-    "global.d.ts",
-    "types/**/*.d.ts"
-  ]
+  "include": ["src/**/*.ts", "test/**/*.ts", "global.d.ts", "types/**/*.d.ts"]
 }
