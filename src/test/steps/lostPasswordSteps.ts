@@ -6,6 +6,9 @@ import LostPasswordPage from "../../pages/lostPasswordPage";
 let lostPasswordPage: LostPasswordPage;
 
 Given('estou na página de recuperação de senha', async function () {
+  if (!fixture.page) {
+    throw new Error("fixture.page não está inicializado.");
+  }
   lostPasswordPage = new LostPasswordPage(fixture.page);
   await lostPasswordPage.acessarPagina();
 });

@@ -1,8 +1,11 @@
 import { LaunchOptions, chromium, firefox, webkit } from "@playwright/test";
 
 const options: LaunchOptions = {
-    headless: !true
+    headless: !true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    timeout: 30000
 }
+
 export const invokeBrowser = () => {
     const browserType = process.env.npm_config_BROWSER || "chrome";
     switch (browserType) {
@@ -15,5 +18,4 @@ export const invokeBrowser = () => {
         default:
             throw new Error("Please set the proper browser!")
     }
-
 }

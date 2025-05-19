@@ -5,9 +5,14 @@ import LoginPage from "../../pages/loginPage";
 let loginPage: LoginPage;
 
 Given('que estou na página de login', async function () {
+  if (!fixture.page) {
+    throw new Error("fixture.page não está inicializado.");
+  }
   loginPage = new LoginPage(fixture.page);
   await loginPage.navegarParaLogin();
-  fixture.logger.info("Naveguei para a página de login");
+  if (fixture.logger) {
+    fixture.logger.info("Naveguei para a página de login");
+  }
 });
 
 When('clico no botão Acessar', async function () {
@@ -47,6 +52,9 @@ Then('o título de boas-vindas deve estar visível', async function () {
 });
 
 When('clico no link {string}', async function (linkText: string) {
+  if (!fixture.page) {
+    throw new Error("fixture.page não está inicializado.");
+  }
   await fixture.page.getByRole('link', { name: linkText }).click();
 });
 

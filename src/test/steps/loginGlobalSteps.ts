@@ -1,28 +1,21 @@
 import { When, Then } from "@cucumber/cucumber";
+import { expect } from "@playwright/test";
 import { fixture } from "../../hooks/pageFixture";
 import LoginPage from "../../pages/loginPage";
 
 let loginPage: LoginPage;
 
 When('estou na página de login', async function () {
+  if (!fixture.page) {
+    throw new Error("fixture.page não está inicializado.");
+  }
   loginPage = new LoginPage(fixture.page);
   await loginPage.navegarParaLogin();
 });
 
-When('preencho o CPF e a senha', async function () {
-  await loginPage.digitarUsuario(this.loginUser);
-  await loginPage.digitarSenha(this.loginPassword);
-});
-
-When('clico no botão de login', async function () {
-  await loginPage.clicarAcessar();
-});
-
 Then('devo ver a página de escolha de atribuição', async function () {
-  await loginPage.deveEstarNaPaginaDeAtribuicao();
+  if (!fixture.page) {
+    throw new Error("fixture.page não está inicializado.");
+  }
+  await expect(fixture.page.locator('#ui-id-1')).toContainText('Escolha a atribuição para esta sessão');
 });
-
-Then('devo ver a página de escolha de atribuição', async function () {
-    await loginPage.deveEstarNaPaginaDeAtribuicao(); // Isso deve estar implementado em loginPage.ts
-  });
-  

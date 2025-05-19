@@ -7,13 +7,12 @@ module.exports = {
         paths: [
             "src/test/features/"
         ],
+        publishQuiet: true,
         dryRun: false,
         require: [
-            "src/test/steps/globalSteps.ts",
-            "src/test/steps/loginGlobalSteps.ts",
             "src/test/steps/*.ts",
             "src/hooks/hooks.ts"
-          ],
+        ],
         requireModule: [
             "ts-node/register"
         ],
@@ -23,12 +22,13 @@ module.exports = {
             "json:test-results/cucumber-report.json",
             "rerun:@rerun.txt"
         ],
-        parallel: 2
+        parallel: 1
     },
     rerun: {
         formatOptions: {
             snippetInterface: "async-await"
         },
+        publishQuiet: true,
         dryRun: false,
         require: [
             "src/test/steps/*.ts",

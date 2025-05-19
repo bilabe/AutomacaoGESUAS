@@ -18,11 +18,10 @@ export default class PlaywrightWrapper {
         await element.click();
     }
 
-    async navigateTo(link: string) {
-        await Promise.all([
-            this.page.waitForNavigation(),
-            this.page.click(link)
-        ])
-    }
+async navigateTo(link: string) {
+    await this.page.click(link);
+    await this.page.waitForLoadState('networkidle'); // ou 'domcontentloaded'
+}
+
 
 }
