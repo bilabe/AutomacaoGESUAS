@@ -1,17 +1,17 @@
 import { Given, When, Then } from "@cucumber/cucumber";
-import { fixture } from "../../hooks/pageFixture";
+import { pageFixture } from "../../hooks/pageFixture";
 import LoginPage from "../../pages/loginPage";
 
 let loginPage: LoginPage;
 
 Given('que estou na página de login', async function () {
-  if (!fixture.page) {
-    throw new Error("fixture.page não está inicializado.");
+  if (!pageFixture.page) {
+    throw new Error("pageFixture.page não está inicializado.");
   }
-  loginPage = new LoginPage(fixture.page);
+  loginPage = new LoginPage(pageFixture.page);
   await loginPage.navegarParaLogin();
-  if (fixture.logger) {
-    fixture.logger.info("Naveguei para a página de login");
+  if (pageFixture.logger) {
+    pageFixture.logger.info("Naveguei para a página de login");
   }
 });
 
@@ -39,8 +39,8 @@ Then('devo ser redirecionado para a página de atribuição', async function () 
   await loginPage.deveEstarNaPaginaDeAtribuicao();
 });
 
-Then('deve aparecer a mensagem de erro {string}', async function (_mensagem: string) {
-  await loginPage.deveVerMensagemErro(); // aqui você pode melhorar para checar a string exata se quiser
+Then('deve aparecer a mensagem de erro {string}', async function () {
+  await loginPage.deveVerMensagemErro();
 });
 
 Then('a logo do GESUAS deve ser exibida', async function () {
@@ -52,10 +52,10 @@ Then('o título de boas-vindas deve estar visível', async function () {
 });
 
 When('clico no link {string}', async function (linkText: string) {
-  if (!fixture.page) {
-    throw new Error("fixture.page não está inicializado.");
+  if (!pageFixture.page) {
+    throw new Error("pageFixture.page não está inicializado.");
   }
-  await fixture.page.getByRole('link', { name: linkText }).click();
+  await pageFixture.page.getByRole('link', { name: linkText }).click();
 });
 
 Then('devo ser redirecionado para a página de recuperação de senha', async function () {

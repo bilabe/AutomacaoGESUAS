@@ -1,0 +1,7 @@
+node_modules/
+dist/
+build/
+config/cucumber.js
+*.d.ts
+types/*.d.ts
+src/**/*.d.ts

@@ -1,15 +1,14 @@
 import { Given, When, Then } from "@cucumber/cucumber";
-import { expect } from "@playwright/test";
-import { fixture } from "../../hooks/pageFixture";
+import { pageFixture } from "../../hooks/pageFixture";
 import LostPasswordPage from "../../pages/lostPasswordPage";
 
 let lostPasswordPage: LostPasswordPage;
 
 Given('estou na página de recuperação de senha', async function () {
-  if (!fixture.page) {
-    throw new Error("fixture.page não está inicializado.");
+  if (!pageFixture.page) {
+    throw new Error("pageFixture.page não está inicializado.");
   }
-  lostPasswordPage = new LostPasswordPage(fixture.page);
+  lostPasswordPage = new LostPasswordPage(pageFixture.page);
   await lostPasswordPage.acessarPagina();
 });
 
