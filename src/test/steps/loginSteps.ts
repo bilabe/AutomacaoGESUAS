@@ -39,9 +39,12 @@ Then("devo ser redirecionado para a página de atribuição", async function () 
   await loginPage.deveEstarNaPaginaDeAtribuicao();
 });
 
-Then("deve aparecer a mensagem de erro {string}", async function () {
-  await loginPage.deveVerMensagemErro();
-});
+Then(
+  "deve aparecer a mensagem de erro {string}",
+  async function (mensagemEsperada: string) {
+    await loginPage.deveVerMensagemErro(mensagemEsperada);
+  },
+);
 
 Then("a logo do GESUAS deve ser exibida", async function () {
   await loginPage.logoGesuasDeveEstarVisivel();

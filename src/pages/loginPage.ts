@@ -47,8 +47,10 @@ export default class LoginPage {
     return this.page.getByText("Usuário inexistente ou senha");
   }
 
-  async deveVerMensagemErro() {
-    await expect(this.localizarMensagemErro()).toBeVisible();
+  async deveVerMensagemErro(mensagemEsperada: string) {
+    const elemento = await this.localizarMensagemErro();
+    await expect(elemento).toBeVisible();
+    await expect(elemento).toHaveText(mensagemEsperada);
   }
 
   // Verifica se a logo do GESUAS está visível
