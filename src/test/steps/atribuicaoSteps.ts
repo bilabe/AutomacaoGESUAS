@@ -2,6 +2,7 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { pageFixture } from "../../hooks/pageFixture";
 import AtribuicaoPage from "../../pages/atribuicaoPage";
+import { atribuicoes } from '../data/atribuicoes';
 
 let atribuicaoPage: AtribuicaoPage;
 
@@ -46,8 +47,10 @@ Then("a aba deve conter o texto {string}", async function (texto: string) {
   await expect(pageFixture.page.locator("#ui-id-1")).toContainText(texto);
 });
 
-When("seleciono a atribuição {string}", async function (valor: string) {
-  await atribuicaoPage.selecionarAtribuicao(valor);
+When('seleciono a atribuição {string}', async function (nomeAtribuicao) {
+  const atribuicao = atribuicoes.find(a => a.nome === nomeAtribuicao);
+  if (!atribuicao) throw new Error('Atribuição não encontrada');
+  await atribuicaoPage.selecionarAtribuicao(atribuicao.valor);
 });
 
 When("clico no botão Salvar da tela de atribuição", async function () {
